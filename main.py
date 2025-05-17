@@ -3,6 +3,8 @@ import json
 from faker import Faker
 from typing import Dict, List
 
+import 
+
 faker = Faker('pt-br')
 
 # Mapeamento dos tipos customizados para funções do faker
@@ -55,7 +57,7 @@ if __name__ == "__main__":
         "city": "city",
         "country": "country"
     }
-
+print('erro')
     quantidade = 5  # Número de registros
     dados = gerar_dados(schema, quantidade)
 
