@@ -1,0 +1,31 @@
+name: Python Code Linter
+
+on:
+  push:
+    branches: [ main, develop ] # Dispara em push para as branches main e develop
+  pull_request:
+    branches: [ main, develop ] # Dispara em PR para as branches main e develop
+
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v3
+
+    - name: Set up Python
+      uses: actions/setup-python@v3
+      with:
+        python-version: '3.9'
+
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install flake8
+
+    - name: Lint with flake8
+      run: |
+        # Parar o build se houver erros do flake8 (ex: E9, F63, F7, F82)
+        flake8 . --count --select=E9,F63,F7,F82 --show-source --statistics
+        # Sair com zero para avisos e erros que não são bloqueadores (ex: limites de linha)
+        flake8 . --count --exit-zero --max-complexity=10 --max-line-length=120 --statistics
